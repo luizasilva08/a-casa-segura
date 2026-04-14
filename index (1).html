@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Segura | Seu Marcos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+
+        /* Configurações gerais e Rolagem Suave */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Barra de Navegação */
+        nav {
+            background-color: #0a2540;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            color: #ffb703;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #fb8500;
+        }
+
+        /* Cabeçalho / Hero Section */
+        header {
+            background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.9)), url('https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 20px 100px 20px;
+            margin-top: 50px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ffb703;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-weight: 300;
+        }
+
+        .btn-primario {
+            background-color: #fb8500;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .btn-primario:hover {
+            background-color: #e85d04;
+        }
+
+        /* Estilização Geral de Seções */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2.titulo-secao {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #023047;
+            margin-bottom: 40px;
+        }
+
+        /* Seção da Jornada (Cards) */
+        .secao-jornada {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .grid-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none; /* Remove sublinhado se for link */
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Estilo específico para o card clicável do Site */
+        a.card-clicavel {
+            border: 2px solid transparent;
+        }
+
+        a.card-clicavel:hover {
+            border: 2px solid #219ebc;
+            cursor: pointer;
+        }
+
+        .card h3 {
+            color: #219ebc;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .link-faq {
+            display: inline-block;
+            margin-top: 15px;
+            color: #fb8500;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Seção Catálogo (Tabela) */
+        .tabela-container {
+            overflow-x: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #023047;
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e2e8f0;
+        }
+
+        .destaque-tabela {
+            color: #fb8500;
+            font-weight: bold;
+        }
+
+        /* Seção FAQ (Dúvidas Frequentes) */
+        #faq {
+            background-color: #e2e8f0;
+            max-width: 100%; /* Ocupa a tela toda */
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        details {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        summary {
+            font-weight: bold;
+            color: #023047;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none; /* Esconde a setinha padrão do navegador */
+        }
+
+        summary::after {
+            content: '+';
+            color: #fb8500;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        details[open] summary::after {
+            content: '-'; /* Muda para 'menos' quando aberto */
+        }
+
+        details p {
+            margin-top: 15px;
+            color: #555;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Seção Contato */
+        .contato-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-contato, .form-contato {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-contato h3 {
+            color: #219ebc;
+            margin-bottom: 20px;
+        }
+
+        .info-contato p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .form-contato input, .form-contato textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-contato button {
+            background-color: #023047;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .form-contato button:hover {
+            background-color: #219ebc;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Casa Segura</a>
+        <div class="menu">
+            <a href="#catalogo">Catálogo</a>
+            <a href="#faq">Dúvidas Frequentes</a>
+            <a href="#contato">Falar com Seu Marcos</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Casa Segura do Seu Marcos</h1>
+        <p>A união perfeita entre a tradição que você confia e a tecnologia que você deseja. Soluções inteligentes para prédios e casas, sem quebra-quebra.</p>
+        <a href="#catalogo" class="btn-primario">Ver Catálogo</a>
+        <a href="#contato" class="btn-primario">Pedir Orçamento</a>
+    </header>
+
+    <section class="secao-jornada">
+        <h2 class="titulo-secao">Sua Jornada de Segurança</h2>
+        <div class="grid-cards">
+            
+            <a href="#faq" class="card card-clicavel">
+                <h3>🌐 Nosso Site</h3>
+                <p>Pesquise e tire suas dúvidas no conforto da sua casa. Informações claras sobre segurança, modelos de fechaduras e dicas para condomínios.</p>
+                <span class="link-faq">Acessar Dúvidas Frequentes ➔</span>
+            </a>
+
+            <div class="card">
+                <h3>📲 Totem Interativo</h3>
+                <p>Ao chegar na loja, use nosso totem para simular qual fechadura combina melhor com a sua porta, comparando preços e funcionalidades na hora.</p>
+            </div>
+
+            <div class="card">
+                <h3>🚪 Showroom Físico</h3>
+                <p>Tem medo de comprar e não gostar? No balcão do Seu Marcos você pode tocar, testar a biometria e ver a chave de emergência funcionando ao vivo.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="catalogo">
+        <h2 class="titulo-secao">Nosso Catálogo Especializado</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #666;">Todos os produtos podem ser testados fisicamente em nosso Showroom.</p>
+        
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto / Solução</th>
+                        <th>Tipo de Abertura</th>
+                        <th>Perfil Ideal</th>
+                        <th>Nível de Segurança</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="destaque-tabela">Kit Retrofit Híbrido Premium</td>
+                        <td>Biometria, App, Senha + <strong>Chave Mecânica</strong></td>
+                        <td>Portas de entrada, Síndicos e Idosos</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Fechadura Digital Simples</td>
+                        <td>Senha Numérica e Cartão (Tag)</td>
+                        <td>Portas internas e escritórios</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Cadeado Inteligente Bluetooth</td>
+                        <td>Aplicativo via Celular</td>
+                        <td>Jovens, portões de bicicleta e armários</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="faq-container">
+            <h2 class="titulo-secao">Dúvidas Frequentes (FAQ)</h2>
+            
+            <details>
+                <summary>Acabou a energia ou acabou a pilha, como eu entro em casa?</summary>
+                <p>Fique tranquilo! O nosso <strong>Kit Híbrido</strong> avisa no aplicativo muito antes da pilha acabar. Se mesmo assim acabar, você sempre terá uma chave física de emergência (como uma porta normal) ou poderá usar um carregador de celular portátil (powerbank) pelo lado de fora para ativar o painel e digitar a senha.</p>
+            </details>
+
+            <details>
+                <summary>A internet caiu, a fechadura digital para de funcionar?</summary>
+                <p>Não! A biometria, as senhas numéricas e as tags (cartõezinhos) funcionam 100% offline. A internet só é necessária caso você queira destrancar a porta remotamente pelo aplicativo (para uma visita que chegou mais cedo, por exemplo).</p>
+            </details>
+
+            <details>
+                <summary>Meu prédio é antigo. Preciso quebrar a porta para instalar?</summary>
+                <p>De jeito nenhum! A Casa Segura trabalha com modelos chamados de "Sobrepor" ou opções de "Retrofit" que aproveitam a furação da sua porta antiga. Nós preservamos a madeira e fazemos a instalação sem sujeira e sem quebra-quebra no corredor do seu condomínio.</p>
+            </details>
+
+            <details>
+                <summary>Esses sistemas podem ser hackeados?</summary>
+                <p>Nós trabalhamos apenas com marcas homologadas e com criptografia de ponta a ponta. Além disso, o serviço do Seu Marcos inclui não só a instalação física, mas uma consultoria rápida para garantir que a fechadura seja conectada de forma segura à sua rede Wi-Fi residencial.</p>
+            </details>
+        </div>
+    </section>
+
+    <section id="contato">
+        <h2 class="titulo-secao">Fale com o Seu Marcos</h2>
+        
+        <div class="contato-container">
+            <div class="info-contato">
+                <h3>Visite nosso Showroom</h3>
+                <p>📍 <strong>Endereço:</strong> Rua da Tradição, 123 - Centro</p>
+                <p>⏰ <strong>Horário:</strong> Segunda a Sexta: 08h às 18h | Sábados: 08h às 12h</p>
+                <p>📞 <strong>WhatsApp Direto:</strong> (11) 99999-0000</p>
+                <p><em>"Venha tomar um café, tirar suas dúvidas de perto e testar as novas fechaduras na prática antes de comprar!"</em></p>
+            </div>
+
+            <div class="form-contato">
+                <h3>Ou peça um orçamento por aqui</h3>
+                <form action="#" onsubmit="alert('Obrigado! Seu Marcos recebeu sua mensagem e responderá em breve.'); return false;">
+                    <input type="text" placeholder="Seu Nome (ex: Lucas ou Alberto)" required>
+                    <input type="tel" placeholder="Seu WhatsApp" required>
+                    <textarea rows="4" placeholder="Como podemos ajudar? Ex: Quero instalar um Kit Híbrido na minha porta de madeira." required></textarea>
+                    <button type="submit">Enviar para o Seu Marcos</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Casa Segura | Design Thinking - Protótipo Figital</p>
+    </footer>
+
+</body>
+</html>
