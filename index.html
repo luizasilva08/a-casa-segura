@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa Segura | Seu Marcos</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
 
-        /* Configurações gerais e Rolagem Suave */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        /* =========================================================
+           CSS ORIGINAL (Landing Page, Totem Interativo e Showroom)
+           ========================================================= */
+        :root {
+            --primary: #0a2540;
+            --accent: #fb8500;
+            --gold: #ffb703;
+            --text-dark: #023047;
+            --text-light: #555;
+            --bg-light: #f8f9fa;
+           
+            /* Cores Showroom Original */
+            --floor-color: #e6dace;
+            --wall-color: #5d4037;
+            --furniture-wood: #8d6e63;
+            --furniture-metal: #cfd8dc;
+            --shelf-wood: #a1887f;
+            --plant-color: #2e7d32;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        html {
-            scroll-behavior: smooth;
+        .blackout-mode-active {
+            --floor-color: #241c18;
+            --wall-color: #1a1210;
+            --furniture-wood: #3e2723;
+            --furniture-metal: #263238;
+            --shelf-wood: #4e342e;
+            --plant-color: #143616;
+            background-color: #0d1117 !important;
         }
 
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-light); color: #333; line-height: 1.6; }
 
-        /* Barra de Navegação */
         nav {
-            background-color: #0a2540;
-            padding: 15px 50px;
+            background-color: var(--primary);
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,426 +53,730 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+        .logo-nav { color: var(--gold); font-weight: 700; font-size: 1.6rem; text-decoration: none; letter-spacing: -0.5px; }
+        .menu a { color: white; text-decoration: none; margin-left: 25px; font-weight: 500; transition: all 0.3s; opacity: 0.9; }
+        .menu a:hover { color: var(--accent); opacity: 1; }
 
-        .logo {
-            color: #ffb703;
-            font-weight: bold;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #fb8500;
-        }
-
-        /* Cabeçalho / Hero Section */
         header {
-            background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.9)), url('https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.95)), url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1920&q=80') center/cover;
             color: white;
             text-align: center;
-            padding: 150px 20px 100px 20px;
-            margin-top: 50px;
+            padding: 180px 20px 120px 20px;
         }
+        header h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--gold); font-weight: 700; }
+        header p { font-size: 1.3rem; max-width: 700px; margin: 0 auto; font-weight: 300; color: rgba(255,255,255,0.9); }
 
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #ffb703;
-        }
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        h2.titulo-secao { text-align: center; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 50px; font-weight: 700; }
 
-        header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            font-weight: 300;
-        }
-
-        .btn-primario {
-            background-color: #fb8500;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s;
-            display: inline-block;
-            margin: 5px;
-        }
-
-        .btn-primario:hover {
-            background-color: #e85d04;
-        }
-
-        /* Estilização Geral de Seções */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2.titulo-secao {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #023047;
-            margin-bottom: 40px;
-        }
-
-        /* Seção da Jornada (Cards) */
-        .secao-jornada {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .grid-cards {
-            display: flex;
-            gap: 20px;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
+        .grid-cards { display: flex; gap: 30px; justify-content: space-between; flex-wrap: wrap; }
         .card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             flex: 1;
             min-width: 250px;
             text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none; /* Remove sublinhado se for link */
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-decoration: none;
             color: inherit;
             display: block;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: #219ebc; cursor: pointer; }
+        .card h3 { color: #219ebc; margin-bottom: 18px; font-size: 1.6rem; font-weight: 700; }
+        .card p { color: var(--text-light); font-size: 1rem; line-height: 1.6; }
+        .link-faq { display: inline-block; margin-top: 20px; color: var(--accent); font-weight: 700; font-size: 1rem; }
+
+        /* FAQ */
+        #faq { background-color: #eff3f6; max-width: 100%; }
+        .faq-container { max-width: 850px; margin: 0 auto; }
+        details { background: white; padding: 20px 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; border: 1px solid transparent; transition: 0.3s; }
+        details:hover { border-color: #219ebc; }
+        summary { font-weight: 600; color: var(--text-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: '↓'; color: var(--accent); font-size: 1.2rem; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        details p { margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; color: var(--text-light); }
+
+        /* Contato */
+        .contato-container { display: flex; flex-wrap: wrap; gap: 50px; background: white; padding: 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
+        .info-contato h3, .form-contato h3 { color: #219ebc; margin-bottom: 25px; font-size: 1.8rem; }
+        .form-contato input, .form-contato textarea { width: 100%; padding: 15px; margin-bottom: 20px; border: 1.5px solid #eee; border-radius: 8px; background: #fbfbfb; font-size: 1rem; }
+        .form-contato button { background-color: var(--text-dark); color: white; border: none; padding: 18px; border-radius: 8px; cursor: pointer; font-weight: 700; width: 100%; font-size: 1.1rem; transition: 0.3s; }
+
+        footer { background-color: #111; color: rgba(255,255,255,0.6); text-align: center; padding: 40px 20px; font-size: 0.95rem; }
+
+        /* --- SOBREPOSIÇÕES (TOTEM, SHOWROOM E COMPRAS) --- */
+        .full-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; overflow-y: auto; }
+        .btn-close-overlay { position: fixed; top: 30px; right: 30px; background: #ff4757; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 700; z-index: 10001; }
+
+        /* Estilo Totem */
+        #totemOverlay { background-color: #121212; overflow: hidden; }
+        .totem-screen { display: flex; flex-direction: column; width: 100%; height: 100%; background: linear-gradient(rgba(26, 42, 108, 0.92), rgba(18, 18, 18, 0.98)), url('https://images.unsplash.com/photo-1510519133411-c9679b343c1c?auto=format&fit=crop&w=1350&q=80') center/cover; color: white; text-align: center; padding: 60px; transition: opacity 0.5s ease; }
+        .totem-title { font-size: 4rem; color: #fdbb2d; font-weight: 700; margin-bottom: 10px; }
+        .totem-subtitle { font-size: 2rem; font-weight: 300; color: #ccc; margin-bottom: 60px; }
+        .option-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; width: 85%; margin: auto; }
+        .option-button { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 25px; padding: 80px 40px; cursor: pointer; transition: all 0.4s ease; }
+        .option-button:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.15); border-color: white; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .option-text { font-size: 2.5rem; font-weight: 700; color: white; display: block; margin-bottom: 15px; }
+        .option-desc { font-size: 1.4rem; color: rgba(255,255,255,0.7); }
+        .preview-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; color: white; padding: 80px 50px; z-index: 10000; overflow-y: auto; }
+        .sample-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .sample-item { background: rgba(255, 255, 255, 0.07); padding: 35px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .sample-item strong { color: #fdbb2d; font-size: 1.4rem; display: block; margin-bottom: 10px; }
+        .btn-back-totem { margin-top: 50px; background: none; color: white; border: 2px solid white; padding: 18px 40px; border-radius: 40px; cursor: pointer; font-weight: 700; }
+
+        /* --- ESTILOS ESPECÍFICOS SHOWROOM --- */
+        #showroomOverlay { background-color: #eaeff2; transition: var(--transition); padding: 60px 20px; }
+        #showroomOverlay.blackout-mode { background-color: #0d1117; color: #c9d1d9; }
+       
+        .showroom-content { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .showroom-header { text-align: center; margin-bottom: 30px; }
+        .showroom-header h1 { font-size: 2.5rem; font-weight: 800; }
+       
+        .toggle-btn {
+            background: linear-gradient(135deg, #4fd1c5 0%, #319795 100%);
+            color: white; border: none; padding: 16px 32px; font-size: 1.1rem;
+            font-weight: 600; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(49, 151, 149, 0.3); transition: var(--transition);
+            margin-bottom: 30px;
+        }
+        #showroomOverlay.blackout-mode .toggle-btn { background: linear-gradient(135deg, #fc8181 0%, #e53e3e 100%); }
+
+        .dashboard { display: flex; gap: 40px; width: 100%; }
+        .room-container {
+            flex: 1.5; background-color: var(--floor-color); position: relative; height: 550px;
+            border-radius: 12px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); transition: var(--transition);
+            overflow: hidden; background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.04) 40px, rgba(0,0,0,0.04) 42px);
+            border: 10px solid var(--wall-color); border-bottom: none;
+        }
+        .wall-shadow { position: absolute; top: 0; left: 0; right: 0; height: 15px; background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent); }
+        .rug { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 160px; height: 70px; background-color: rgba(0,0,0,0.08); border-radius: 12px 12px 0 0; }
+        .door-display { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); width: 180px; height: 40px; background-color: var(--furniture-wood); border-radius: 6px; }
+        .service-counter { position: absolute; top: 120px; left: 40px; width: 90px; height: 200px; background-color: var(--furniture-metal); border-radius: 8px; }
+        .shelves { position: absolute; top: 60px; right: 40px; width: 140px; height: 80px; background-color: var(--shelf-wood); border-radius: 4px; border: 3px solid var(--wall-color); display: flex; flex-direction: column; justify-content: space-evenly; }
+        .shelf-line { width: 100%; height: 4px; background: rgba(0,0,0,0.3); }
+        .plant { position: absolute; bottom: 40px; right: 50px; width: 45px; height: 45px; background-color: var(--plant-color); border-radius: 50%; }
+
+        .hotspot { position: absolute; width: 26px; height: 26px; background-color: #fff; border: 3px solid #3182ce; border-radius: 50%; cursor: pointer; animation: pulse 2s infinite; z-index: 10; transition: var(--transition); }
+        #showroomOverlay.blackout-mode .hotspot { border-color: #ff4d4d; box-shadow: 0 0 15px #ff4d4d; }
+       
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(49, 130, 206, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(49, 130, 206, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(49, 130, 206, 0); }
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
+        .info-panel { flex: 1; background-color: white; border-radius: 16px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); transition: var(--transition); display: flex; flex-direction: column; }
+        #showroomOverlay.blackout-mode .info-panel { background-color: #161b22; border: 1px solid rgba(255,255,255,0.05); }
 
-        /* Estilo específico para o card clicável do Site */
-        a.card-clicavel {
-            border: 2px solid transparent;
-        }
+        .price { font-size: 1.4rem; font-weight: 600; color: #38a169; margin-bottom: 20px; }
+        .category-badge { display: inline-block; background-color: #2d3748; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
+        .system-status { margin-top: auto; padding: 20px; border-radius: 12px; background-color: #ebf8ff; border-left: 4px solid #3182ce; }
+        #showroomOverlay.blackout-mode .system-status.safe { background-color: rgba(72, 187, 120, 0.1); border-left-color: #48bb78; }
 
-        a.card-clicavel:hover {
-            border: 2px solid #219ebc;
-            cursor: pointer;
-        }
 
-        .card h3 {
-            color: #219ebc;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
+        /* =========================================================
+           CSS NOVO (Isolado apenas para o Totem de Compras)
+           ========================================================= */
+        .compras-wrapper {
+            --primary-bg: #165b5c;
+            --secondary-bg: #114243;
+            --light-bg: #f4f6f6;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --accent: #f39c12;
 
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .link-faq {
-            display: inline-block;
-            margin-top: 15px;
-            color: #fb8500;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        /* Seção Catálogo (Tabela) */
-        .tabela-container {
-            overflow-x: auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-radius: 10px;
-            background-color: white;
-        }
-
-        table {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            display: flex;
+            height: 100vh;
             width: 100%;
-            border-collapse: collapse;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .compras-wrapper .sidebar {
+            width: 250px;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .compras-wrapper .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .compras-wrapper .category-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
             text-align: left;
-        }
-
-        th, td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #023047;
-            color: white;
-            font-weight: 500;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e2e8f0;
-        }
-
-        .destaque-tabela {
-            color: #fb8500;
-            font-weight: bold;
-        }
-
-        /* Seção FAQ (Dúvidas Frequentes) */
-        #faq {
-            background-color: #e2e8f0;
-            max-width: 100%; /* Ocupa a tela toda */
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        details {
-            background: white;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        summary {
-            font-weight: bold;
-            color: #023047;
+            padding: 15px;
             font-size: 1.1rem;
-            list-style: none;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .compras-wrapper .category-btn:hover,
+        .compras-wrapper .category-btn.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .compras-wrapper .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background-color: var(--light-bg);
+        }
+
+        .compras-wrapper .page-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-bg);
+        }
+
+        .compras-wrapper .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .compras-wrapper .product-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+            border: 1px solid #eaeaea;
+        }
+
+        .compras-wrapper .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .compras-wrapper .product-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .compras-wrapper .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-bg);
+        }
+
+        .compras-wrapper .product-desc {
+            font-size: 0.9rem;
+            color: #666;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .compras-wrapper .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-bg);
+            margin-bottom: 15px;
+        }
+
+        .compras-wrapper .add-btn {
+            background-color: var(--primary-bg);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .compras-wrapper .add-btn:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        .compras-wrapper .cart-panel {
+            width: 320px;
+            background: #fff;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        .compras-wrapper .cart-title {
+            font-size: 1.5rem;
+            color: var(--secondary-bg);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-bg);
+            padding-bottom: 10px;
+        }
+
+        .compras-wrapper .cart-items {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .compras-wrapper .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
 
-        summary::-webkit-details-marker {
-            display: none; /* Esconde a setinha padrão do navegador */
-        }
-
-        summary::after {
-            content: '+';
-            color: #fb8500;
-            font-size: 1.5rem;
+        .compras-wrapper .cart-item-info p {
             font-weight: bold;
+            font-size: 0.95rem;
         }
 
-        details[open] summary::after {
-            content: '-'; /* Muda para 'menos' quando aberto */
+        .compras-wrapper .cart-item-info span {
+            color: #777;
+            font-size: 0.85rem;
         }
 
-        details p {
-            margin-top: 15px;
-            color: #555;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+        .compras-wrapper .cart-total-area {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
         }
 
-        /* Seção Contato */
-        .contato-container {
+        .compras-wrapper .cart-total {
             display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .info-contato, .form-contato {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .info-contato h3 {
-            color: #219ebc;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
-        .info-contato p {
-            margin-bottom: 10px;
-            color: #555;
-        }
-
-        .form-contato input, .form-contato textarea {
+        .compras-wrapper .checkout-btn {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-contato button {
-            background-color: #023047;
-            color: white;
+            background-color: var(--accent);
+            color: #fff;
             border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 15px;
+            font-size: 1.1rem;
             font-weight: bold;
-            transition: background 0.3s;
-            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        .form-contato button:hover {
-            background-color: #219ebc;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9rem;
-            margin-top: 40px;
+        .compras-wrapper .checkout-btn:hover {
+            background-color: #d68910;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">Casa Segura</a>
+        <a href="#" class="logo-nav">🔒 CASA SEGURA</a>
         <div class="menu">
-            <a href="#catalogo">Catálogo</a>
-            <a href="#faq">Dúvidas Frequentes</a>
-            <a href="#contato">Falar com Seu Marcos</a>
+            <a href="#faq">Dúvidas Frequentes ❓</a>
+            <a href="#contato">Falar com Seu Marcos 👨‍🔧</a>
         </div>
     </nav>
 
     <header>
         <h1>Casa Segura do Seu Marcos</h1>
-        <p>A união perfeita entre a tradição que você confia e a tecnologia que você deseja. Soluções inteligentes para prédios e casas, sem quebra-quebra.</p>
-        <a href="#catalogo" class="btn-primario">Ver Catálogo</a>
-        <a href="#contato" class="btn-primario">Pedir Orçamento</a>
+        <p>Desde 2006 a união perfeita entre a tradição que você confia e a tecnologia que você deseja. Soluções inteligentes para prédios e casas, sem quebra-quebra. ✨</p>
     </header>
 
     <section class="secao-jornada">
-        <h2 class="titulo-secao">Sua Jornada de Segurança</h2>
+        <h2 class="titulo-secao">Sua Jornada de Segurança 🚀</h2>
         <div class="grid-cards">
-            
-            <a href="#faq" class="card card-clicavel">
-                <h3>🌐 Nosso Site</h3>
+            <a href="#faq" class="card">
+                <h3>Nosso Site 🌐</h3>
                 <p>Pesquise e tire suas dúvidas no conforto da sua casa. Informações claras sobre segurança, modelos de fechaduras e dicas para condomínios.</p>
                 <span class="link-faq">Acessar Dúvidas Frequentes ➔</span>
             </a>
 
-            <div class="card">
-                <h3>📲 Totem Interativo</h3>
+            <div class="card" onclick="openTotem()">
+                <h3>Totem Interativo 📱</h3>
                 <p>Ao chegar na loja, use nosso totem para simular qual fechadura combina melhor com a sua porta, comparando preços e funcionalidades na hora.</p>
+                <span class="link-faq">Abrir Simulador Agora ➔</span>
             </div>
 
-            <div class="card">
-                <h3>🚪 Showroom Físico</h3>
+            <div class="card" onclick="openShowroom()">
+                <h3>Showroom Físico 🏠</h3>
                 <p>Tem medo de comprar e não gostar? No balcão do Seu Marcos você pode tocar, testar a biometria e ver a chave de emergência funcionando ao vivo.</p>
+                <span class="link-faq">Visitar Showroom Virtual ➔</span>
             </div>
 
-        </div>
-    </section>
-
-    <section id="catalogo">
-        <h2 class="titulo-secao">Nosso Catálogo Especializado</h2>
-        <p style="text-align: center; margin-bottom: 20px; color: #666;">Todos os produtos podem ser testados fisicamente em nosso Showroom.</p>
-        
-        <div class="tabela-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto / Solução</th>
-                        <th>Tipo de Abertura</th>
-                        <th>Perfil Ideal</th>
-                        <th>Nível de Segurança</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="destaque-tabela">Kit Retrofit Híbrido Premium</td>
-                        <td>Biometria, App, Senha + <strong>Chave Mecânica</strong></td>
-                        <td>Portas de entrada, Síndicos e Idosos</td>
-                        <td>⭐⭐⭐⭐⭐</td>
-                    </tr>
-                    <tr>
-                        <td>Fechadura Digital Simples</td>
-                        <td>Senha Numérica e Cartão (Tag)</td>
-                        <td>Portas internas e escritórios</td>
-                        <td>⭐⭐⭐</td>
-                    </tr>
-                    <tr>
-                        <td>Cadeado Inteligente Bluetooth</td>
-                        <td>Aplicativo via Celular</td>
-                        <td>Jovens, portões de bicicleta e armários</td>
-                        <td>⭐⭐⭐⭐</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="card" onclick="openCompras()">
+                <h3>Loja de Compras 🛒</h3>
+                <p>Acesse nosso totem de compras virtual para montar seu carrinho e finalizar seu projeto diretamente conosco de forma rápida.</p>
+                <span class="link-faq">Acessar Loja de Compras ➔</span>
+            </div>
         </div>
     </section>
 
     <section id="faq">
         <div class="faq-container">
-            <h2 class="titulo-secao">Dúvidas Frequentes (FAQ)</h2>
-            
+            <h2 class="titulo-secao">Dúvidas Frequentes 💡</h2>
             <details>
                 <summary>Acabou a energia ou acabou a pilha, como eu entro em casa?</summary>
-                <p>Fique tranquilo! O nosso <strong>Kit Híbrido</strong> avisa no aplicativo muito antes da pilha acabar. Se mesmo assim acabar, você sempre terá uma chave física de emergência (como uma porta normal) ou poderá usar um carregador de celular portátil (powerbank) pelo lado de fora para ativar o painel e digitar a senha.</p>
+                <p>Fique tranquilo! O nosso <strong>Kit Híbrido</strong> avisa no aplicativo muito antes da pilha acabar. Se mesmo assim acabar, você sempre terá uma chave física de emergência ou poderá usar um powerbank pelo lado de fora.</p>
             </details>
-
             <details>
                 <summary>A internet caiu, a fechadura digital para de funcionar?</summary>
-                <p>Não! A biometria, as senhas numéricas e as tags (cartõezinhos) funcionam 100% offline. A internet só é necessária caso você queira destrancar a porta remotamente pelo aplicativo (para uma visita que chegou mais cedo, por exemplo).</p>
+                <p>Não! A biometria, as senhas numéricas e as tags funcionam 100% offline. A internet só é necessária para abertura remota via aplicativo.</p>
             </details>
-
             <details>
                 <summary>Meu prédio é antigo. Preciso quebrar a porta para instalar?</summary>
-                <p>De jeito nenhum! A Casa Segura trabalha com modelos chamados de "Sobrepor" ou opções de "Retrofit" que aproveitam a furação da sua porta antiga. Nós preservamos a madeira e fazemos a instalação sem sujeira e sem quebra-quebra no corredor do seu condomínio.</p>
+                <p>De jeito nenhum! Trabalhamos com modelos de sobrepor ou retrofit que aproveitam a furação antiga, sem sujeira.</p>
             </details>
-
             <details>
                 <summary>Esses sistemas podem ser hackeados?</summary>
-                <p>Nós trabalhamos apenas com marcas homologadas e com criptografia de ponta a ponta. Além disso, o serviço do Seu Marcos inclui não só a instalação física, mas uma consultoria rápida para garantir que a fechadura seja conectada de forma segura à sua rede Wi-Fi residencial.</p>
+                <p>Trabalhamos apenas com marcas homologadas e criptografia de ponta a ponta, garantindo segurança física e digital.</p>
             </details>
         </div>
     </section>
 
     <section id="contato">
-        <h2 class="titulo-secao">Fale com o Seu Marcos</h2>
-        
+        <h2 class="titulo-secao">Fale com o Seu Marcos 📞</h2>
         <div class="contato-container">
             <div class="info-contato">
                 <h3>Visite nosso Showroom</h3>
-                <p>📍 <strong>Endereço:</strong> Rua da Tradição, 123 - Centro</p>
-                <p>⏰ <strong>Horário:</strong> Segunda a Sexta: 08h às 18h | Sábados: 08h às 12h</p>
-                <p>📞 <strong>WhatsApp Direto:</strong> (11) 99999-0000</p>
-                <p><em>"Venha tomar um café, tirar suas dúvidas de perto e testar as novas fechaduras na prática antes de comprar!"</em></p>
+                <p><strong> 📍 Endereço:</strong> Rua da Tradição, 123 - Centro</p>
+                <p><strong> ⏰ Horário:</strong> Seg a Sex: 08h às 18h | Sáb: 08h às 12h</p>
+                <p><strong> 💬 WhatsApp:</strong> (11) 99999-0000</p>
             </div>
-
             <div class="form-contato">
-                <h3>Ou peça um orçamento por aqui</h3>
-                <form action="#" onsubmit="alert('Obrigado! Seu Marcos recebeu sua mensagem e responderá em breve.'); return false;">
-                    <input type="text" placeholder="Seu Nome (ex: Lucas ou Alberto)" required>
+                <h3>Peça um orçamento 📝</h3>
+                <form onsubmit="alert('Obrigado! Seu Marcos responderá em breve.'); return false;">
+                    <input type="text" placeholder="Seu Nome" required>
                     <input type="tel" placeholder="Seu WhatsApp" required>
-                    <textarea rows="4" placeholder="Como podemos ajudar? Ex: Quero instalar um Kit Híbrido na minha porta de madeira." required></textarea>
-                    <button type="submit">Enviar para o Seu Marcos</button>
+                    <textarea rows="4" placeholder="Como podemos ajudar?" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>Casa Segura | Design Thinking - Protótipo Figital</p>
-    </footer>
+    <footer><p>Casa Segura | 2026 🛡️</p></footer>
 
+    <div id="totemOverlay" class="full-overlay">
+        <button class="btn-close-overlay" onclick="closeOverlays()">SAIR X</button>
+        <div class="totem-screen" id="totemHome">
+            <div class="totem-title">Casa Segura</div>
+            <div class="totem-subtitle">Simulador de Soluções Inteligentes 🤖</div>
+            <div class="option-container">
+                <div class="option-button" onclick="showTotemPreview('classica')">
+                    <span class="option-text">SEGURANÇA CLÁSSICA 🗝️</span>
+                    <span class="option-desc">Chaves, Cadeados & Tradição</span>
+                </div>
+                <div class="option-button" onclick="showTotemPreview('moderna')">
+                    <span class="option-text">CASA INTELIGENTE 📱</span>
+                    <span class="option-desc">Digital, Biometria & App</span>
+                </div>
+            </div>
+        </div>
+        <div class="preview-screen" id="totemPreview">
+            <div style="max-width: 1000px; margin: auto;">
+                <h2 id="tPreviewTitle" style="color:#fdbb2d; font-size: 3.5rem;"></h2>
+                <div class="sample-grid" id="tSampleGrid"></div>
+                <button class="btn-back-totem" onclick="hideTotemPreview()">← Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="showroomOverlay" class="full-overlay">
+        <button class="btn-close-overlay" onclick="closeOverlays()">SAIR X</button>
+        <div class="showroom-content">
+            <div class="showroom-header">
+                <h1 id="s-title">Showroom À Prova de Falhas 🏢</h1>
+                <p>Explore as prateleiras e estandes interativos da loja do Seu Marcos.</p>
+            </div>
+
+            <button class="toggle-btn" id="btn-power" onclick="toggleBlackout()">
+                Simular Queda de Energia ⚡
+            </button>
+
+            <div class="dashboard">
+                <div class="room-container">
+                    <div class="wall-shadow"></div>
+                    <div class="rug"></div>
+                    <div class="door-display"></div>
+                    <div class="service-counter"></div>
+                    <div class="shelves"><div class="shelf-line"></div><div class="shelf-line"></div></div>
+                    <div class="plant"></div>
+                   
+                    <div class="hotspot" id="p1" style="bottom: 97px; left: calc(50% - 40px);" onmouseover="updateShowroomPanel('fechadura')"></div>
+                    <div class="hotspot" id="p2" style="bottom: 97px; left: calc(50% + 40px);" onmouseover="updateShowroomPanel('mecanica')"></div>
+                    <div class="hotspot" id="p3" style="top: 20px; right: 20px;" onmouseover="updateShowroomPanel('camera')"></div>
+                    <div class="hotspot" id="p4" style="top: 160px; left: 60px;" onmouseover="updateShowroomPanel('tag')"></div>
+                    <div class="hotspot" id="p5" style="top: 75px; right: 100px;" onmouseover="updateShowroomPanel('hub')"></div>
+                </div>
+
+                <div class="info-panel">
+                    <div id="s-empty">Passe o cursor sobre os itens piscantes 🕵️‍♂️</div>
+                    <div id="s-details" style="display:none">
+                        <span class="category-badge" id="s-type">Categoria</span>
+                        <h2 id="s-name">Nome</h2>
+                        <div class="price" id="s-price">R$ 0,00</div>
+                        <p><strong>Descrição:</strong> <span id="s-desc"></span></p>
+                       
+                        <div class="system-status" id="s-status-box">
+                            <strong id="s-status-title">Status: Normal</strong><br>
+                            <span id="s-status-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="comprasOverlay" class="full-overlay">
+        <button class="btn-close-overlay" onclick="closeOverlays()">SAIR X</button>
+       
+        <div class="compras-wrapper">
+            <aside class="sidebar">
+                <div class="logo">
+                     CASA SEGURA<br>
+                    <span style="font-size: 0.8rem; font-weight: normal;">Autoatendimento 🤖</span>
+                </div>
+                <button class="category-btn active" onclick="filtrarCompras('todos', this)"> ✨ Destaques (Híbrido)</button>
+                <button class="category-btn" onclick="filtrarCompras('digital', this)"> 💡 Smart Home</button>
+                <button class="category-btn" onclick="filtrarCompras('tradicional', this)"> 🛠️ Tradição & Reparos</button>
+            </aside>
+
+            <main class="main-content">
+                <h2 class="page-title">Simule seu Projeto de Segurança 📐</h2>
+               
+                <div class="products-grid" id="compras-products-grid">
+                    <p style="text-align: center; color: #666; font-style: italic;">Sincronizando estoque com o Totem do Seu Marcos... 🔄</p>
+                </div>
+            </main>
+
+            <aside class="cart-panel">
+                <h3 class="cart-title">Seu Projeto 📦</h3>
+               
+                <div class="cart-items" id="cart-items-container">
+                    <p style="color: #999; text-align: center; margin-top: 50px;" id="empty-cart-msg">Adicione itens para montar seu orçamento.</p>
+                </div>
+
+                <div class="cart-total-area">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="total-price">R$ 0,00</span>
+                    </div>
+                    <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Orçamento ✅</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        function openTotem() {
+            document.getElementById('totemOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function openShowroom() {
+            document.getElementById('showroomOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function openCompras() {
+            document.getElementById('comprasOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeOverlays() {
+            document.getElementById('totemOverlay').style.display = 'none';
+            document.getElementById('showroomOverlay').style.display = 'none';
+            document.getElementById('comprasOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        let totemSamples = {
+            'classica': { title: 'Segurança Clássica 🗝️', items: [] },
+            'moderna': { title: 'Casa Inteligente 📱', items: [] }
+        };
+        const urlDaPlanilha = 'https://script.google.com/macros/s/AKfycbwX9umxSucS7m8CznjO98lzgSvDcnmsgNGYOGT1AxsBB7wdnE2cUwZfTAAgTYpCzD8W/exec';
+       
+        async function carregarDadosPlanilha() {
+            try {
+                const resposta = await fetch(urlDaPlanilha);
+                const dados = await resposta.json();
+               
+                totemSamples.classica.items = [];
+                totemSamples.moderna.items = [];
+               
+                const comprasGrid = document.getElementById('compras-products-grid');
+                if(comprasGrid) comprasGrid.innerHTML = '';
+
+                dados.forEach(linha => {
+                    if (!linha.NOME) return;
+                   
+                    const tipoClasse = linha.TIPO.trim().toLowerCase();
+                    const emojiIcon = tipoClasse === 'digital' ? '🔒' : '🔑';
+
+                    const itemFormatado = {
+                        name: linha.NOME,
+                        desc: `Preço: ${linha['PREÇO']} | Estoque: ${linha.ESTOQUE} un. | ${linha.LOCAL}`
+                    };
+                    if (tipoClasse === 'tradicional') {
+                        totemSamples.classica.items.push(itemFormatado);
+                    } else if (tipoClasse === 'digital') {
+                        totemSamples.moderna.items.push(itemFormatado);
+                    }
+
+                    if(comprasGrid) {
+                        const valorLimpoStr = String(linha['PREÇO']).replace(/[^0-9,-]+/g,"").replace(",", ".");
+                        const valorFloat = parseFloat(valorLimpoStr) || 0;
+                        const precoDisplay = typeof linha['PREÇO'] === 'number' ? formatarMoeda(linha['PREÇO']) : linha['PREÇO'];
+
+                        comprasGrid.innerHTML += `
+                            <div class="product-card" data-tipo="${tipoClasse}">
+                                <div class="product-icon">${emojiIcon}</div>
+                                <div class="product-title">${linha.NOME}</div>
+                                <div class="product-desc"><strong>Categoria:</strong> ${linha.TIPO}<br><strong>Estoque:</strong> ${linha.ESTOQUE} un.<br><strong>Local:</strong> ${linha.LOCAL}</div>
+                                <div class="product-price">${precoDisplay}</div>
+                                <button class="add-btn" onclick="adicionarAoCarrinho('${linha.NOME}', ${valorFloat})">Adicionar ao Projeto</button>
+                            </div>
+                        `;
+                    }
+                });
+            } catch (erro) {
+                console.error("Erro: ", erro);
+                document.getElementById('compras-products-grid').innerHTML = '<p style="text-align: center; color: red;">Erro ao sincronizar. ❌</p>';
+            }
+        }
+        carregarDadosPlanilha();
+
+        function showTotemPreview(type) {
+            const data = totemSamples[type];
+            document.getElementById('tPreviewTitle').innerText = data.title;
+            const grid = document.getElementById('tSampleGrid');
+            grid.innerHTML = '';
+           
+            if (data.items.length === 0) {
+                grid.innerHTML = '<div class="sample-item"><p>Carregando estoque... 🔄</p></div>';
+            } else {
+                data.items.forEach(item => {
+                    grid.innerHTML += `<div class="sample-item"><strong>${item.name}</strong><p>${item.desc}</p></div>`;
+                });
+            }
+            document.getElementById('totemHome').style.opacity = '0';
+            setTimeout(() => { document.getElementById('totemPreview').style.display = 'block'; }, 300);
+        }
+       
+        function hideTotemPreview() {
+            document.getElementById('totemPreview').style.display = 'none';
+            document.getElementById('totemHome').style.opacity = '1';
+        }
+
+        function filtrarCompras(tipo, btn) {
+            document.querySelectorAll('.compras-wrapper .category-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            const produtos = document.querySelectorAll('.compras-wrapper .product-card');
+            produtos.forEach(prod => {
+                if (tipo === 'todos' || prod.getAttribute('data-tipo') === tipo) {
+                    prod.style.display = 'flex';
+                } else {
+                    prod.style.display = 'none';
+                }
+            });
+        }
+
+        let isBlackout = false;
+        const showroomDb = {
+            'fechadura': { name: 'Fechadura Smart Pro', type: 'Digital', price: 'R$ 899,00', desc: 'Biometria e senha.', normal: 'Conectada ao Wi-Fi.', blackout: 'Opera com 4 pilhas AA independentes.' },
+            'mecanica': { name: 'Fechadura Multiponto', type: 'Mecânica', price: 'R$ 350,00', desc: 'Travamento físico.', normal: 'Operação manual.', blackout: 'Inalterada. Exige chave física.' },
+            'camera': { name: 'Câmera IP 360º', type: 'Segurança', price: 'R$ 420,00', desc: 'IA e visão noturna.', normal: 'Streaming ao vivo.', blackout: 'Grava localmente no SD.' },
+            'tag': { name: 'Tag NFC', type: 'Acessório', price: 'R$ 35,00', desc: 'Encostou, abriu.', normal: 'Leitura instantânea.', blackout: 'Funciona via energia da fechadura.' },
+            'hub': { name: 'Hub Zigbee', type: 'Central', price: 'R$ 299,00', desc: 'Cérebro da casa.', normal: 'Gerencia automações.', blackout: 'Mantém rede local.' }
+        };
+
+        function toggleBlackout() {
+            isBlackout = !isBlackout;
+            const overlay = document.getElementById('showroomOverlay');
+            overlay.classList.toggle('blackout-mode');
+            document.body.classList.toggle('blackout-mode-active');
+            document.getElementById('btn-power').innerText = isBlackout ? "Restaurar Energia 💡" : "Simular Queda de Energia ⚡";
+        }
+
+        function updateShowroomPanel(id) {
+            const data = showroomDb[id];
+            document.getElementById('s-empty').style.display = 'none';
+            document.getElementById('s-details').style.display = 'block';
+            document.getElementById('s-name').innerText = data.name;
+            document.getElementById('s-type').innerText = data.type;
+            document.getElementById('s-price').innerText = data.price;
+            document.getElementById('s-desc').innerText = data.desc;
+           
+            const statusBox = document.getElementById('s-status-box');
+            statusBox.className = isBlackout ? "system-status safe" : "system-status";
+            document.getElementById('s-status-title').innerText = isBlackout ? "Status: APAGÃO 🔋" : "Status: Normal ✅";
+            document.getElementById('s-status-text').innerText = isBlackout ? data.blackout : data.normal;
+        }
+
+        let total = 0;
+        const cartContainer = document.getElementById('cart-items-container');
+        const emptyMsg = document.getElementById('empty-cart-msg');
+        const totalElement = document.getElementById('total-price');
+
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function adicionarAoCarrinho(nome, preco) {
+            if (emptyMsg) emptyMsg.style.display = 'none';
+            total += preco;
+            totalElement.innerText = formatarMoeda(total);
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `
+                <div class="cart-item-info">
+                    <p>${nome}</p>
+                    <span>${formatarMoeda(preco)}</span>
+                </div>
+                <button style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:1.1rem;" onclick="removerDoCarrinho(this, ${preco})">X</button>
+            `;
+            cartContainer.appendChild(itemDiv);
+        }
+
+        function removerDoCarrinho(btnElement, preco) {
+            const itemDiv = btnElement.parentElement;
+            cartContainer.removeChild(itemDiv);
+            total -= preco;
+            totalElement.innerText = formatarMoeda(total);
+            if (cartContainer.children.length === 1 && cartContainer.children[0].id === 'empty-cart-msg') {
+                emptyMsg.style.display = 'block';
+            }
+        }
+
+        function finalizarCompra() {
+            if (total === 0) {
+                alert("Adicione algum item ao projeto primeiro! 🛒");
+            } else {
+                alert("Orçamento de " + formatarMoeda(total) + " gerado com sucesso! Entraremos em contato em breve. 📩");
+                cartContainer.innerHTML = '<p style="color: #999; text-align: center; margin-top: 50px;" id="empty-cart-msg">Adicione itens para montar seu orçamento.</p>';
+                total = 0;
+                totalElement.innerText = "R$ 0,00";
+            }
+        }
+    </script>
 </body>
 </html>
