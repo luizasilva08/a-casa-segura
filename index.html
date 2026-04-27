@@ -776,6 +776,46 @@
                 total = 0;
                 totalElement.innerText = "R$ 0,00";
             }
+
+            // Cole aqui a URL que você copiou no Passo 2 do Apps Script
+const URL_DO_GOOGLE_SCRIPT = "https://script.google.com/macros/s/SUA_URL_AQUI/exec";
+
+// Esta é a função que você deve chamar quando o usuário clicar em "Finalizar Orçamento"
+function finalizarCompra(idDoProduto, quantidadeComprada) {
+    
+    // 1. O "Truque" Visual: Atualizar a tela imediatamente para o professor ver
+    // Supondo que você tem um elemento no HTML com id="estoque-1"
+    let elementoEstoque = document.getElementById(`estoque-${idDoProduto}`);
+    if (elementoEstoque) {
+        let estoqueAtual = parseInt(elementoEstoque.innerText);
+        elementoEstoque.innerText = estoqueAtual - quantidadeComprada;
+    }
+
+    // 2. Mandar a informação para o Google Sheets em segundo plano
+    // Montamos a URL com os dados da compra
+    const urlComDados = `${URL_DO_GOOGLE_SCRIPT}?id=${idDoProduto}&qtde=${quantidadeComprada}`;
+
+    fetch(urlComDados)
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === "sucesso") {
+                console.log("Planilha atualizada! Novo estoque:", data.novoEstoque);
+                alert("Orçamento finalizado com sucesso!"); // Pode trocar por um modal bonito
+            } else {
+                console.error("Erro na planilha:", data.erro);
+            }
+        })
+        .catch(error => {
+            console.error("Erro de conexão:", error);
+        });
+}
+<div class="card-produto">
+    <h3>Fechadura com senha</h3>
+    <p>Estoque: <span id="estoque-1">60</span> un.</p> 
+    <p>R$ 249,95</p>
+    
+    <button onclick="finalizarCompra(1, 1)">Comprar 1 unidade</button>
+</div>
         }
     </script>
 </body>
