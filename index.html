@@ -399,7 +399,7 @@
 
     <header>
         <h1>Casa Segura do Seu Marcos</h1>
-        <p>Desde 2006 a união perfeita entre a tradição que você confia e a tecnologia que você deseja. Soluções inteligentes para prédios e casas, sem quebra-quebra. ✨</p>
+        <p>A união perfeita entre a tradição que você confia e a tecnologia que você deseja. Soluções inteligentes para prédios e casas, sem quebra-quebra. ✨</p>
     </header>
 
     <section class="secao-jornada">
@@ -474,7 +474,7 @@
         </div>
     </section>
 
-    <footer><p>Casa Segura | 2026 🛡️</p></footer>
+    <footer><p>Casa Segura | Protótipo Interativo 2026 🛡️</p></footer>
 
     <div id="totemOverlay" class="full-overlay">
         <button class="btn-close-overlay" onclick="closeOverlays()">SAIR X</button>
@@ -776,39 +776,7 @@
                 total = 0;
                 totalElement.innerText = "R$ 0,00";
             }
-
-            // Cole aqui a URL que você copiou no Passo 2 do Apps Script
-    const URL_DO_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzxjjRf2y4tOIlyXibeVAUmvPK6el6BMQN-zfVCeMJB1INs-6z6aXy1Tg0HZfU2AFqA/exec";
-    
-    // Esta é a função que você deve chamar quando o usuário clicar em "Finalizar Orçamento"
-    function finalizarCompra(idDoProduto, quantidadeComprada) {
-        
-        // 1. O "Truque" Visual: Atualizar a tela imediatamente para o professor ver
-        // Supondo que você tem um elemento no HTML com id="estoque-1"
-        let elementoEstoque = document.getElementById(`estoque-${idDoProduto}`);
-        if (elementoEstoque) {
-            let estoqueAtual = parseInt(elementoEstoque.innerText);
-            elementoEstoque.innerText = estoqueAtual - quantidadeComprada;
         }
-    
-        // 2. Mandar a informação para o Google Sheets em segundo plano
-        // Montamos a URL com os dados da compra
-        const urlComDados = `${https://script.google.com/macros/s/AKfycbzxjjRf2y4tOIlyXibeVAUmvPK6el6BMQN-zfVCeMJB1INs-6z6aXy1Tg0HZfU2AFqA/exec}?id=${idDoProduto}&qtde=${quantidadeComprada}`;
-    
-        fetch(urlComDados)
-            .then(response => response.json())
-            .then(data => {
-                if(data.status === "sucesso") {
-                    console.log("Planilha atualizada! Novo estoque:", data.novoEstoque);
-                    alert("Orçamento finalizado com sucesso!"); // Pode trocar por um modal bonito
-                } else {
-                    console.error("Erro na planilha:", data.erro);
-                }
-            })
-            .catch(error => {
-                console.error("Erro de conexão:", error);
-            });
-    } }
     </script>
 </body>
 </html>
