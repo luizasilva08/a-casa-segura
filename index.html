@@ -385,22 +385,6 @@
         .compras-wrapper .checkout-btn:hover {
             background-color: #d68910;
         }
-
-.btn-secreto {
-    position: fixed; /* Fixa no canto da tela mesmo se rolar a página */
-    bottom: 15px;    /* 15px de distância do fundo */
-    right: 15px;     /* 15px de distância da direita */
-    font-size: 24px;
-    text-decoration: none;
-    opacity: 0.05;   /* 0.05 deixa ele QUASE INVISÍVEL (apenas uma sombra) */
-    transition: opacity 0.3s ease; /* Animação suave */
-    z-index: 9999;   /* Garante que fique por cima de tudo */
-    cursor: pointer;
-}
-
-.btn-secreto:hover {
-    opacity: 1;
-}
     </style>
 </head>
 <body>
@@ -826,9 +810,5 @@ function finalizarCompra(idDoProduto, quantidadeComprada) {
         });
 }
     </script>
-    <a href="./dashboard/index.html" class="btn-secreto" title="Área Administrativa">
-        ⚙️
-    </a>
-    
 </body>
 </html>
