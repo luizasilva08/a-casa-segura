@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Gerencial - Casa Segura</title>
+    <style>
+        /* =========================================
+           ESTILOS GERAIS
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; overflow: hidden; /* Evita barra de rolagem dupla */ }
+
+        /* =========================================
+           TELA DE LOGIN
+           ========================================= */
+        #tela-login {
+            background-color: #174c4f; 
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw; position: absolute; z-index: 1000;
+        }
+        .login-box {
+            background-color: #ffffff; padding: 40px; border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); width: 100%; max-width: 400px; text-align: center;
+        }
+        .login-box h2 { color: #174c4f; margin-bottom: 5px; font-size: 28px; font-weight: 800; }
+        .login-box p { color: #666; margin-bottom: 30px; font-size: 14px; }
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; outline: none;}
+        .input-group input:focus { border-color: #174c4f; }
+        
+        .btn-acao { 
+            width: 100%; padding: 14px; background-color: #f39c12; color: white; 
+            border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-acao:hover { background-color: #e67e22; }
+        
+        .erro-login { color: #d32f2f; font-size: 14px; margin-bottom: 15px; font-weight: bold; display: none; }
+
+        /* =========================================
+           TELA DO SISTEMA (DASHBOARD)
+           ========================================= */
+        #tela-sistema {
+            display: none; /* Começa invisível, o JS vai mostrar */
+            height: 100vh; width: 100vw; display: flex; 
+        }
+        
+        /* Menu Lateral Esquerdo */
+        .sidebar { background-color: #174c4f; color: white; width: 250px; padding: 20px; display: flex; flex-direction: column; }
+        .sidebar h2 { margin-bottom: 30px; font-size: 22px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px;}
+        .menu-item { padding: 15px; background-color: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 10px; cursor: default; font-weight: bold;}
+        
+        /* Área Central (Apenas o Power BI) */
+        .conteudo-principal { flex: 1; padding: 20px; display: flex; flex-direction: column; background-color: #eef2f5;}
+        
+        .cabecalho h1 { color: #174c4f; margin-bottom: 20px; font-size: 24px; }
+        
+        /* O container do Power BI expande para preencher a tela */
+        .area-powerbi { 
+            flex: 1; /* Faz o Power BI ocupar todo o espaço restante da tela */
+            background: white; padding: 10px; border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+        }
+        .area-powerbi iframe { width: 100%; height: 100%; border: none; border-radius: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="tela-login">
+        <div class="login-box">
+            <h2>CASA SEGURA</h2>
+            <p>Acesso ao Painel Gerencial</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" placeholder="admin" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="123" required>
+                </div>
+                <p id="mensagemErro" class="erro-login">Usuário ou senha incorretos!</p>
+                <button type="submit" class="btn-acao">Acessar Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="tela-sistema" style="display: none;">
+        
+        <div class="sidebar">
+            <h2>CASA SEGURA</h2>
+            <div class="menu-item">📊 Dashboard de Vendas</div>
+            </div>
+
+        <div class="conteudo-principal">
+            <div class="cabecalho">
+                <h1>Visão Geral do Estoque e Vendas</h1>
+            </div>
+
+            <div class="area-powerbi">
+                <iframe title="Dashboard" src="https://app.powerbi.com/view?r=COLE_AQUI_SEU_LINK_DO_POWER_BI" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede a página de recarregar
+            
+            const usu = document.getElementById('usuario').value;
+            const sen = document.getElementById('senha').value;
+            
+            // As credenciais para você usar na apresentação
+            if (usu === "seumarcos" && sen === "123") {
+                // Se acertar a senha: esconde a tela de login e mostra a tela do Power BI
+                document.getElementById('tela-login').style.display = 'none';
+                document.getElementById('tela-sistema').style.display = 'flex';
+            } else {
+                // Se errar a senha: mostra a mensagem de erro
+                document.getElementById('mensagemErro').style.display = 'block';
+                document.getElementById('senha').value = ""; // Limpa a senha para tentar de novo
+            }
+        });
+    </script>
+</body>
+</html>
+
 
