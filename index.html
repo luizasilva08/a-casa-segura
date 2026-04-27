@@ -793,7 +793,7 @@ function finalizarCompra(idDoProduto, quantidadeComprada) {
 
     // 2. Mandar a informação para o Google Sheets em segundo plano
     // Montamos a URL com os dados da compra
-    const urlComDados = `${URL_DO_GOOGLE_SCRIPT}?id=${idDoProduto}&qtde=${quantidadeComprada}`;
+    const urlComDados = `${https://script.google.com/macros/s/AKfycbzxjjRf2y4tOIlyXibeVAUmvPK6el6BMQN-zfVCeMJB1INs-6z6aXy1Tg0HZfU2AFqA/exec}?id=${idDoProduto}&qtde=${quantidadeComprada}`;
 
     fetch(urlComDados)
         .then(response => response.json())
