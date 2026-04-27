@@ -776,6 +776,16 @@
                 total = 0;
                 totalElement.innerText = "R$ 0,00";
             }
+            function realizarVenda(idProduto) {
+                  const urlScript = "https://script.google.com/macros/s/AKfycbztutO9hnfYvd6IuE8NCI5wsSs3FYoO1ods7rdOQkSIbG1GMo9gwaMtBqv7sYlKFOA/exec";
+                
+                  fetch(urlScript, {
+                    method: 'POST',
+                    body: JSON.stringify({ id: idProduto })
+                  })
+                  .then(res => alert("Venda registada e stock atualizado!"))
+                  .catch(err => console.error("Erro:", err));
+                }
         }
     </script>
 </body>
