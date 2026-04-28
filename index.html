@@ -385,6 +385,35 @@
         .compras-wrapper .checkout-btn:hover {
             background-color: #d68910;
         }
+
+        /* =========================================
+   ESTILO DO BOTÃO WHATSAPP
+   ========================================= */
+.btn-whatsapp {
+    position: fixed;
+    bottom: 25px; /* Fica no canto inferior */
+    right: 25px;  /* Fica no canto direito */
+    width: 60px;
+    height: 60px;
+    background-color: #25d366; /* Verde oficial do WhatsApp */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.1); /* Dá uma leve aumentada ao passar o mouse */
+}
+
+.btn-whatsapp img {
+    width: 35px;
+    height: 35px;
+}
     </style>
 </head>
 <body>
@@ -776,7 +805,37 @@
                 total = 0;
                 totalElement.innerText = "R$ 0,00";
             }
+
+            function finalizarOrcamentoWhatsApp() {
+    if (carrinho.length === 0) {
+        alert("Adicione produtos ao projeto primeiro!");
+        return;
+    }
+
+    let numeroVendedor = "5511999999999"; // Coloque seu número aqui
+    
+    // Começa a montar o texto da mensagem
+    let mensagem = "Olá! Gostaria de fechar o seguinte projeto para a Casa Segura:\n\n";
+
+    // Adiciona cada item do carrinho na mensagem
+    carrinho.forEach(item => {
+        mensagem += `✅ ${item.nome} - R$ ${item.preco.toFixed(2)}\n`;
+    });
+
+    // Adiciona o total
+    mensagem += `\n*Total estimado: R$ ${total.toFixed(2)}*`;
+
+    // O JavaScript converte os espaços e quebras de linha para um formato que a URL entende
+    let textoCodificado = encodeURIComponent(mensagem);
+    
+    // Cria o link final e abre em uma nova aba
+    let linkWhatsApp = `https://wa.me/${numeroVendedor}?text=${textoCodificado}`;
+    window.open(linkWhatsApp, '_blank');
+}
         }
     </script>
+    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20tirar%20uma%20dúvida%20sobre%20a%20Casa%20Segura." target="_blank" class="btn-whatsapp" title="Fale conosco pelo WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
 </body>
 </html>
