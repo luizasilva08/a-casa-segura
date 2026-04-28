@@ -385,34 +385,31 @@
         .compras-wrapper .checkout-btn:hover {
             background-color: #d68910;
         }
+        
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 25px; /* Fica no canto inferior */
+            right: 25px;  /* Fica no canto direito */
+            width: 60px;
+            height: 60px;
+            background-color: #25d366; /* Verde oficial do WhatsApp */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 99999;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            }
 
-        /* =========================================
-   ESTILO DO BOTÃO WHATSAPP
-   ========================================= */
-.btn-whatsapp {
-    position: fixed;
-    bottom: 25px; /* Fica no canto inferior */
-    right: 25px;  /* Fica no canto direito */
-    width: 60px;
-    height: 60px;
-    background-color: #25d366; /* Verde oficial do WhatsApp */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 1000;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.btn-whatsapp:hover {
-    transform: scale(1.1); /* Dá uma leve aumentada ao passar o mouse */
-}
-
-.btn-whatsapp img {
-    width: 35px;
-    height: 35px;
+            .btn-whatsapp:hover {
+                transform: scale(1.1); /* Dá uma leve aumentada ao passar o mouse */
+            }
+            
+            .btn-whatsapp img {
+                width: 35px;
+                height: 35px;
 }
     </style>
 </head>
